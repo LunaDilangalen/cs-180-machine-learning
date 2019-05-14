@@ -1,0 +1,16 @@
+# retraining the InceptionV3 model on the new categories
+
+# learning rate: 0.00001
+# train_batch_size = 2000
+# validation_batch_size = 1000
+# training_steps = default (4000)
+py retrain_pr.py --output_graph=MiniPlaces_Tensorflow\output_graph.pb --output_label=MiniPlaces_Tensorflow.txt --image_dir=MiniPlaces\train --summaries_dir=retrain_logs --bottleneck_dir=MiniPlaces_Tensorflow --learning_rate=.00001 --train_batch_size=2000 --validation_batch_size=1000
+
+# labeling new images
+py label_image.py --graph=MiniPlaces_Tensorflow\output_graph.pb --input_layer=Mul --output_layer=final_result --image=test\00000001.jpg
+
+# to get to tensorboard
+cd AppData/Local/Programs/Python/Python36/Lib/site-packages/tensorboard
+
+# execute command
+py main.py --logdir=C:\Users\KuroShiro\Desktop\project_scene_recog\retrain_logs
